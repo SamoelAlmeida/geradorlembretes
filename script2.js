@@ -43,6 +43,15 @@ function criarCardLembrete(texto, prioridade) {
     infoWrapper.appendChild(paragrafo);
     infoWrapper.appendChild(pequeno);
 
+    const botoesWrapper = document.createElement('div');
+    botoesWrapper.classList.add('botoes-wrapper');
+
+    const btnEditar = document.createElement('button');
+    btnEditar.type = 'button';
+    btnEditar.classList.add('btn-editar');
+    btnEditar.textContent = 'Editar';
+    btnEditar.setAttribute('aria-label', `Editar lembrete: ${texto}`);
+
     const btnDeletar = document.createElement('button');
     btnDeletar.type = 'button';
     btnDeletar.classList.add('btn-deletar');
@@ -53,8 +62,43 @@ function criarCardLembrete(texto, prioridade) {
         card.remove();
     });
 
+    btnEditar.addEventListener('click', () => {
+        if (btnEditar.textContent === 'Editar') {
+            const inputEdicao = document.createElement('input');
+            inputEdicao.type = 'text';
+            inputEdicao.value = strong.textContent;
+            inputEdicao.classList.add('input-edicao');
+
+            paragrafo.replaceChild(inputEdicao, strong);
+            inputEdicao.focus();
+
+            btnEditar.textContent = 'Salvar';
+            btnDeletar.disabled = true;
+        } else {
+            const inputEdicao = paragrafo.querySelector('input');
+            const novoTexto = inputEdicao.value.trim();
+
+            if (novoTexto === '') {
+                alert('A descrição não pode ficar vazia!');
+                inputEdicao.focus();
+                return;
+            }
+
+            strong.textContent = novoTexto;
+            paragrafo.replaceChild(strong, inputEdicao);
+
+            btnEditar.textContent = 'Editar';
+            btnDeletar.disabled = false;
+            btnEditar.setAttribute('aria-label', `Editar lembrete: ${novoTexto}`);
+            btnDeletar.setAttribute('aria-label', `Excluir lembrete: ${novoTexto}`);
+        }
+    });
+
+    botoesWrapper.appendChild(btnEditar);
+    botoesWrapper.appendChild(btnDeletar);
+
     card.appendChild(infoWrapper);
-    card.appendChild(btnDeletar);
+    card.appendChild(botoesWrapper);
 
     return card;
 }

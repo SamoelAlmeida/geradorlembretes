@@ -74,7 +74,6 @@ button:hover {
   min-height: 1.2rem;
 }
 
-/* Grid de Lembretes Gerados Dinamicamente */
 .grid-lembretes {
   display: flex;
   flex-direction: column;
@@ -92,7 +91,6 @@ button:hover {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-/* Estilos dinâmicos baseados na prioridade */
 .card-item.alta { border-left-color: #ef4444; }
 .card-item.media { border-left-color: #f59e0b; }
 .card-item.baixa { border-left-color: #10b981; }
@@ -109,4 +107,13 @@ button:hover {
 
 .btn-deletar:hover {
   background: #fca5a5;
+}
+
+.botoes-wrapper {
+    display: flex;
+    gap: 8px; 
+}
+
+.botoes-wrapper button {
+    flex: 1; 
 }
