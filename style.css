@@ -26,7 +26,7 @@ h1 {
   padding: 1.5rem;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 }
 
 .form-group {
@@ -74,6 +74,29 @@ button:hover {
   min-height: 1.2rem;
 }
 
+.filtro-dropdown-container {
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn-filtro-pequeno {
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  background-color: #ffffff;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #333;
+  width: auto;
+}
+
+.btn-filtro-pequeno:focus {
+  border-color: #4f46e5;
+  outline: none;
+}
+
 .grid-lembretes {
   display: flex;
   flex-direction: column;
@@ -95,7 +118,7 @@ button:hover {
 .card-item.media { border-left-color: #f59e0b; }
 .card-item.baixa { border-left-color: #10b981; }
 
-.btn-deletar {
+.btn-deletar, .btn-editar {
   background: #fee2e2;
   color: #ef4444;
   border: none;
@@ -105,8 +128,9 @@ button:hover {
   width: auto;
 }
 
-.btn-deletar:hover {
-  background: #fca5a5;
+.btn-editar {
+  background: #e0e7ff;
+  color: #4f46e5;
 }
 
 .botoes-wrapper {
@@ -114,6 +138,83 @@ button:hover {
     gap: 8px; 
 }
 
-.botoes-wrapper button {
-    flex: 1; 
+.card-item.concluido {
+    opacity: 0.5; 
+    background-color: #e0e0e0; 
+}
+
+.card-item.concluido strong {
+    text-decoration: line-through;
+}
+
+.esquerda-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px; 
+}
+
+.checkbox-container {
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    user-select: none;
+}
+
+.checkbox-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkmark-circulo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 24px;
+    width: 24px;
+    background-color: #fff; 
+    border: 2px solid #ccc; 
+    border-radius: 50%;    
+    transition: all 0.2s ease;
+}
+
+.checkbox-container:hover input ~ .checkmark-circulo {
+    border-color: #4CAF50;
+}
+
+.checkbox-container input:checked ~ .checkmark-circulo {
+    background-color: #4CAF50; 
+    border-color: #4CAF50;
+}
+
+.checkmark-circulo:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.checkbox-container input:checked ~ .checkmark-circulo:after {
+    display: block;
+}
+
+.checkmark-circulo:after {
+    left: 8px;
+    top: 4px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.input-edicao {
+    padding: 0.4rem;
+    font-size: 1rem;
+    border: 1px solid #4f46e5;
+    border-radius: 4px;
+    width: 100%;
 }
