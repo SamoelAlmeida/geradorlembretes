@@ -1,3 +1,21 @@
+:root {
+  --bg-body: #f0f2f5;
+  --bg-container: #ffffff;
+  --text-color: #333;
+  --border-color: #ccc;
+  --card-bg: #ffffff;
+  --card-concluido: #e0e0e0;
+}
+
+body.dark-mode {
+  --bg-body: #121212;
+  --bg-container: #1e1e1e;
+  --text-color: #e0e0e0;
+  --border-color: #444;
+  --card-bg: #2d2d2d;
+  --card-concluido: #222222;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -6,9 +24,10 @@
 }
 
 body {
-  background-color: #f0f2f5;
-  color: #333;
+  background-color: var(--bg-body);
+  color: var(--text-color);
   padding: 2rem 1rem;
+  transition: background 0.3s, color 0.3s;
 }
 
 .container {
@@ -16,17 +35,35 @@ body {
   margin: 0 auto;
 }
 
-h1 {
-  text-align: center;
+.topo-painel {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 1.5rem;
 }
 
+h1 {
+  margin: 0;
+}
+
+#btn-tema {
+  background: none;
+  border: 1px solid var(--border-color);
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: 6px;
+  width: auto;
+  background-color: var(--card-bg);
+}
+
 .card-inputs {
-  background: #ffffff;
+  background: var(--card-bg);
   padding: 1.5rem;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
   margin-bottom: 1.5rem;
+  border: 1px solid var(--border-color);
 }
 
 .form-group {
@@ -39,13 +76,16 @@ label {
   font-size: 0.9rem;
   font-weight: 600;
   margin-bottom: 0.3rem;
+  color: var(--text-color);
 }
 
 input, select, button {
   padding: 0.75rem;
   border-radius: 6px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--border-color);
   font-size: 1rem;
+  background-color: var(--card-bg);
+  color: var(--text-color);
 }
 
 input:focus, select:focus {
@@ -82,13 +122,13 @@ button:hover {
 
 .btn-filtro-pequeno {
   padding: 6px 12px;
-  border: 1px solid #ccc;
-  background-color: #ffffff;
+  border: 1px solid var(--border-color);
+  background-color: var(--card-bg);
   border-radius: 6px;
   cursor: pointer;
   font-size: 0.85rem;
   font-weight: 600;
-  color: #333;
+  color: var(--text-color);
   width: auto;
 }
 
@@ -104,9 +144,10 @@ button:hover {
 }
 
 .card-item {
-  background: #ffffff;
+  background: var(--card-bg);
   padding: 1rem;
   border-radius: 6px;
+  border: 1px solid var(--border-color);
   border-left: 6px solid #ccc;
   display: flex;
   justify-content: space-between;
@@ -119,8 +160,6 @@ button:hover {
 .card-item.baixa { border-left-color: #10b981; }
 
 .btn-deletar, .btn-editar {
-  background: #fee2e2;
-  color: #ef4444;
   border: none;
   padding: 0.4rem 0.8rem;
   border-radius: 4px;
@@ -128,9 +167,24 @@ button:hover {
   width: auto;
 }
 
+.btn-deletar {
+  background: #fee2e2;
+  color: #ef4444;
+}
+
 .btn-editar {
   background: #e0e7ff;
   color: #4f46e5;
+}
+
+body.dark-mode .btn-deletar {
+  background: #451a1a;
+  color: #fca5a5;
+}
+
+body.dark-mode .btn-editar {
+  background: #1e1b4b;
+  color: #818cf8;
 }
 
 .botoes-wrapper {
@@ -140,7 +194,7 @@ button:hover {
 
 .card-item.concluido {
     opacity: 0.5; 
-    background-color: #e0e0e0; 
+    background-color: var(--card-concluido); 
 }
 
 .card-item.concluido strong {
@@ -176,8 +230,8 @@ button:hover {
     left: 0;
     height: 24px;
     width: 24px;
-    background-color: #fff; 
-    border: 2px solid #ccc; 
+    background-color: var(--card-bg); 
+    border: 2px solid var(--border-color); 
     border-radius: 50%;    
     transition: all 0.2s ease;
 }
@@ -217,4 +271,6 @@ button:hover {
     border: 1px solid #4f46e5;
     border-radius: 4px;
     width: 100%;
+    background-color: var(--card-bg);
+    color: var(--text-color);
 }

@@ -9,7 +9,10 @@
 <body>
 
   <main class="container">
-    <h1>📌 Meus Lembretes</h1>
+    <div class="topo-painel">
+      <h1>📌 Meus Lembretes</h1>
+      <button id="btn-tema" type="button" aria-label="Alternar tema">🌙</button>
+    </div>
 
     <div class="card-inputs">
       <div class="form-group">
@@ -32,7 +35,7 @@
 
     <div class="filtro-dropdown-container">
       <select id="select-filtro" class="btn-filtro-pequeno">
-        <option value="todos">Todos</option>
+        <option value="todos">Filtrar: Todos</option>
         <option value="pendentes">Não Concluídos</option>
         <option value="concluidos">Concluídos</option>
         <option value="alta">Prioridade Alta</option>

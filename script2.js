@@ -4,13 +4,36 @@ const btnAdicionar = document.querySelector('#btn-adicionar');
 const listaLembrete = document.querySelector('#lista-lembretes');
 const msgErro = document.querySelector('#msg-erro');
 const selectFiltro = document.querySelector('#select-filtro');
+const btnTema = document.querySelector('#btn-tema');
 
 const PRIORIDADE_PADRAO = 'baixa';
 let filtroAtual = 'todos';
 
 document.addEventListener('DOMContentLoaded', () => {
     carregarLembretes();
+    carregarTema();
 });
+
+btnTema.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+    if (document.body.classList.contains('dark-mode')) {
+        btnTema.textContent = '☀️';
+        localStorage.setItem('tema', 'escuro');
+    } else {
+        btnTema.textContent = '🌙';
+        localStorage.setItem('tema', 'claro');
+    }
+});
+
+function carregarTema() {
+    const temaSalvo = localStorage.getItem('tema');
+    if (temaSalvo === 'escuro') {
+        document.body.classList.add('dark-mode');
+        btnTema.textContent = '☀️';
+    } else {
+        btnTema.textContent = '🌙';
+    }
+}
 
 selectFiltro.addEventListener('change', (e) => {
     filtroAtual = e.target.value;
