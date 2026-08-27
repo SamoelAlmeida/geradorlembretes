@@ -274,3 +274,10 @@ body.dark-mode .btn-editar {
     background-color: var(--card-bg);
     color: var(--text-color);
 }
+
+input[type="date"] {
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: var(--card-bg);
+  color: var(--text-color);
+}

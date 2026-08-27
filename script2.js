@@ -1,5 +1,6 @@
 const inputTexto = document.querySelector('#input-texto');
 const selectPrioridade = document.querySelector('#select-prioridade'); 
+const inputData = document.querySelector('#input-data');
 const btnAdicionar = document.querySelector('#btn-adicionar');
 const listaLembrete = document.querySelector('#lista-lembretes');
 const msgErro = document.querySelector('#msg-erro');
@@ -43,6 +44,7 @@ selectFiltro.addEventListener('change', (e) => {
 function adicionarLembrete() {
     const texto = inputTexto.value.trim();
     const prioridade = selectPrioridade.value;
+    const data = inputData.value;
 
     if (texto === '') {
         msgErro.textContent = 'Por favor, digite a descrição do lembrete';
@@ -52,7 +54,7 @@ function adicionarLembrete() {
 
     msgErro.textContent = '';
 
-    const novoCard = criarCardLembrete(texto, prioridade, false);
+    const novoCard = criarCardLembrete(texto, prioridade, data, false);
     listaLembrete.appendChild(novoCard);
 
     salvarLembretesNoStorage();
@@ -60,10 +62,11 @@ function adicionarLembrete() {
 
     inputTexto.value = '';
     selectPrioridade.value = PRIORIDADE_PADRAO;
+    inputData.value = '';
     inputTexto.focus();
 }
 
-function criarCardLembrete(texto, prioridade, concluido = false) {
+function criarCardLembrete(texto, prioridade, data, concluido = false) {
     const card = document.createElement('div');
     card.classList.add('card-item', prioridade);
 
@@ -95,7 +98,16 @@ function criarCardLembrete(texto, prioridade, concluido = false) {
     paragrafo.appendChild(strong); 
 
     const pequeno = document.createElement('small');
-    pequeno.textContent = `Prioridade: ${prioridade.toUpperCase()}`; 
+    pequeno.classList.add('info-card-small');
+    pequeno.dataset.rawDate = data || '';
+
+    let dataFormatada = '';
+    if (data) {
+        const [ano, mes, dia] = data.split('-');
+        dataFormatada = ` | Data: ${dia}/${mes}/${ano}`;
+    }
+    
+    pequeno.textContent = `Prioridade: ${prioridade.toUpperCase()}${dataFormatada}`; 
 
     infoWrapper.appendChild(paragrafo);
     infoWrapper.appendChild(pequeno);
@@ -221,8 +233,9 @@ function salvarLembretesNoStorage() {
         const texto = card.querySelector('strong').textContent;
         const prioridade = Array.from(card.classList).find(c => c !== 'card-item' && c !== 'concluido');
         const concluido = card.classList.contains('concluido');
+        const data = card.querySelector('.info-card-small').dataset.rawDate;
 
-        lembretesArray.push({ texto, prioridade, concluido });
+        lembretesArray.push({ texto, prioridade, data, concluido });
     });
 
     localStorage.setItem('lembretes', JSON.stringify(lembretesArray));
@@ -235,7 +248,7 @@ function carregarLembretes() {
     const lembretesArray = JSON.parse(lembretesSalvos);
 
     lembretesArray.forEach(item => {
-        const card = criarCardLembrete(item.texto, item.prioridade, item.concluido);
+        const card = criarCardLembrete(item.texto, item.prioridade, item.data, item.concluido);
         listaLembrete.appendChild(card);
     });
 }
